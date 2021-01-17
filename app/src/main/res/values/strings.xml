@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Recommend Financial Product</string>
+    <string name="app_name">돈 모아</string>
+    <string name="sub_description">예/적금 추천 서비스</string>
 </resources>
