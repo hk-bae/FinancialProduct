@@ -31,6 +31,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.loginBtn.setOnClickListener {
+
+            //서버에 로그인 request 필요
+
             //일단 메인화면으로 이동
             val intent = Intent(this@LoginActivity,MainActivity::class.java)
             startActivity(intent)
