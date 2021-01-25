@@ -59,10 +59,10 @@
         android:padding="40dp">
 
         <EditText
-            android:id="@+id/user_email"
+            android:id="@+id/user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="이메일을 입력해 주세요."
+            android:hint="아이디를 입력해 주세요."
             android:textSize="20dp"
             android:layout_marginTop="60dp"/>
 

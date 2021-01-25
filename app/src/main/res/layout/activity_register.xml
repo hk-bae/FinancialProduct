@@ -120,12 +120,13 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/user_input_birth"
+            <Button
+                android:id="@+id/user_input_birth_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="생년월일을 입력해 주세요.(ex 990101)"
-                android:layout_marginBottom="30dp"/>
+                android:hint="생년월일 선택하기"
+                android:layout_marginBottom="30dp"
+                android:onClick="onClickBirthBtn"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,17 +144,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="이메일"
+                    android:text="아이디"
                     android:textSize="18dp" />
 
 
             </LinearLayout>
 
             <EditText
-                android:id="@+id/user_input_email"
+                android:id="@+id/user_input_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="E-mail@example.com"
+                android:hint="아이디를 입력해주세요."
                 android:layout_marginBottom="30dp"/>
 
             <LinearLayout
@@ -227,7 +228,8 @@
                 android:textSize="24dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:onClick="onClickRegisterBtn"/>
 
         </LinearLayout>
 

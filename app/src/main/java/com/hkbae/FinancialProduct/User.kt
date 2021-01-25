@@ -1,9 +1,11 @@
 package com.hkbae.FinancialProduct
 
+import java.io.Serializable
 
-class User(userId:String,userPw:String,var name:String, var born:String){
-    var userId : String = userId
-        private set
-    var userPw: String= userPw
-        private set
-}
+
+class User (
+    var id : String="",
+    var password : String?=null,
+    var name : String?=null,
+    var born : String?=null
+):Serializable
