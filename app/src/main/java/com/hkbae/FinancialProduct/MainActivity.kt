@@ -47,6 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
+
+    //
+    fun onClickPersonalInfo(view: View) {}
 }
 
 class MyPagerAdapter(
