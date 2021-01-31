@@ -252,15 +252,6 @@
             </LinearLayout>
 
 
-            <Button
-                android:id="@+id/register_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="추천 받기"
-                android:textSize="24dp"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:background="@color/colorPrimary" />
 
         </LinearLayout>
 

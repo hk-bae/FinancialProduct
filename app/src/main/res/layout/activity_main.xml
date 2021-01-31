@@ -21,15 +21,16 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_centerInParent="true"/>
-        <Button
-            android:id="@+id/personal_info"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_baseline_menu_24"
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log out"
+            android:textSize="18dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="8dp"
-            android:onClick="onClickPersonalInfo"/>
+            android:onClick="onClickLogout"/>
 
 
     </RelativeLayout>
@@ -42,10 +43,33 @@
         app:tabSelectedTextColor="@color/colorPrimaryDark"
         app:tabTextAppearance="@style/tab_text"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-16dp"
+            android:layout_alignTop="@+id/recommend_btn" />
+
+        <Button
+            android:id="@+id/recommend_btn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="추천 받기"
+            android:textSize="24dp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentBottom="true"
+            android:onClick="onClickRecommend"/>
+
+    </RelativeLayout>
+
+
 
 
 

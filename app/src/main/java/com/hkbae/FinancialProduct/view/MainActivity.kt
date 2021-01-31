@@ -1,6 +1,7 @@
 package com.hkbae.FinancialProduct
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.viewpager.widget.PagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.hkbae.FinancialProduct.databinding.ActivityLoginBinding
 import com.hkbae.FinancialProduct.databinding.ActivityMainBinding
+import com.hkbae.FinancialProduct.view.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -49,8 +51,19 @@ class MainActivity : AppCompatActivity() {
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
 
-    //
-    fun onClickPersonalInfo(view: View) {}
+    fun onClickRecommend(view: View) {}
+    //로그아웃 기능
+    fun onClickLogout(view: View) {
+        val sharedPreferences = getSharedPreferences("user",Context.MODE_PRIVATE)
+        val editor=sharedPreferences.edit()
+        editor.remove("id")
+        editor.remove("password")
+        editor.commit()
+
+        val intent = Intent(this@MainActivity,LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }
 
 class MyPagerAdapter(

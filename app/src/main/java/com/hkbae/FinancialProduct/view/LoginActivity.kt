@@ -56,7 +56,8 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("id",user.id)
                 editor.putString("password",user.password)
                 editor.commit()
-//                finish()
+                finish()
+
             }else{
                 Toast.makeText(this@LoginActivity,"입력 정보를 확인해 주세요.", Toast.LENGTH_SHORT).show()
             }
