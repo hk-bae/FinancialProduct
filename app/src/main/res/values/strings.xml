@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">돈 모아</string>
     <string name="sub_description">예/적금 추천 서비스</string>
+    <string name="server_url">http://localhost:8080/user</string>
 </resources>
