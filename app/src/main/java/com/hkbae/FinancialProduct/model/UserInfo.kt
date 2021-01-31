@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct
+package com.hkbae.FinancialProduct.model
 
 import java.time.LocalDate
 
@@ -31,7 +31,7 @@ class UserInfo {
         }
     }
 
-    fun addAvailableCities(city:City){
+    fun addAvailableCities(city: City){
         cities.add(city)
     }
 

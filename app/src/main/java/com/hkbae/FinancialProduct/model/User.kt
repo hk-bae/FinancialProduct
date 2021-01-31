@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct
+package com.hkbae.FinancialProduct.model
 
 import java.io.Serializable
 

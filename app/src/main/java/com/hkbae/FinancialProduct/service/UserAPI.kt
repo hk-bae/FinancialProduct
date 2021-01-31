@@ -1,11 +1,17 @@
-package com.hkbae.FinancialProduct
+package com.hkbae.FinancialProduct.service
 
 
-import okhttp3.ResponseBody
+import com.hkbae.FinancialProduct.model.User
 import retrofit2.Call
 import retrofit2.http.*
 
 interface UserAPI {
+
+    @GET("/user/login/")
+    fun login(
+        @Query("id") id:String,
+        @Query("password") password:String
+    ) : Call<User>
 
     @GET("/user/exist/")
     fun getUserCount( //id에 따른 사용자 정보 요청
@@ -18,7 +24,7 @@ interface UserAPI {
     ):Call<Int>
 
     companion object {
-        const val SERVER_URL: String = "http://172.26.30.249:8080"
+        const val SERVER_URL: String = "http://172.26.17.61:8080"
             //"http://172.26.30.249:8080"
     }
 

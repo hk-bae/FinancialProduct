@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct
+package com.hkbae.FinancialProduct.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -8,6 +8,6 @@ object UserApiManager{
         .baseUrl(UserAPI.SERVER_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    var service : UserAPI=retrofit.create(UserAPI::class.java)
+    var service : UserAPI = retrofit.create(UserAPI::class.java)
 
 }

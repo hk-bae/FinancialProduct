@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".view.LoginActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -86,7 +86,8 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="50dp"
+            android:onClick="onClickLoginBtn"/>
 
 
         <Button
@@ -99,7 +100,8 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:onClick="onClickRegisterBtn"/>
 
 
     </LinearLayout>
