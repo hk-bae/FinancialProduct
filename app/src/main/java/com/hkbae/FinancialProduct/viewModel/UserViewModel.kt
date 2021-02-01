@@ -29,10 +29,6 @@ class UserViewModel(application : Application) : AndroidViewModel(application){
         userRepository.postUser()
     }
 
-//    fun postUser(user:User){
-//        userRepository.postUser(user,getApplication())
-//    }
-
 }
 
 

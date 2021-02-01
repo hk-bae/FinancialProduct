@@ -24,8 +24,7 @@ interface UserAPI {
     ):Call<Int>
 
     companion object {
-        const val SERVER_URL: String = "http://172.26.17.61:8080"
-            //"http://172.26.30.249:8080"
+        const val SERVER_URL: String = "http://172.26.19.57:8080"
     }
 
 

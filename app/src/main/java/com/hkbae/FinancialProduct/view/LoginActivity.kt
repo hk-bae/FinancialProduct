@@ -53,9 +53,15 @@ class LoginActivity : AppCompatActivity() {
                 //유저 아이디,비밀번호를 sharedPreference에 저장
                 val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
                 val editor=sharedPreferences.edit()
-                editor.putString("id",user.id)
-                editor.putString("password",user.password)
-                editor.commit()
+
+                editor.apply{
+                    putString("id",user.id)
+                    putString("password",user.password)
+                    putString("name",user.name)
+                    putString("born",user.born)
+                    commit()
+                }
+
                 finish()
 
             }else{
