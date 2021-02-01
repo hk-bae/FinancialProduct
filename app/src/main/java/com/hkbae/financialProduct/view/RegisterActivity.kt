@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct.view
+package com.hkbae.financialProduct.view
 
 import android.app.DatePickerDialog
 import android.graphics.Color
@@ -12,9 +12,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.hkbae.FinancialProduct.model.User
-import com.hkbae.FinancialProduct.viewModel.UserViewModel
-import com.hkbae.FinancialProduct.databinding.ActivityRegisterBinding
+import com.hkbae.financialProduct.model.User
+import com.hkbae.financialProduct.viewModel.UserViewModel
+import com.hkbae.financialProduct.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
 import java.time.LocalDate
 import java.util.*
@@ -44,6 +44,7 @@ class RegisterActivity : AppCompatActivity() {
         val ssb:SpannableStringBuilder= SpannableStringBuilder(registerInfo)
         ssb.setSpan(ForegroundColorSpan(Color.parseColor("#03A9F4")),9,13,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.registerInfoText.setText(ssb)
+
         initDateListener()
 
         val observer = Observer<User>{ user->

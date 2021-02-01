@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct.model
+package com.hkbae.financialProduct.model
 
 
 //정기 예금 클래스

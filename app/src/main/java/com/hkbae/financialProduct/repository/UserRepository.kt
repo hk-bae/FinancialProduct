@@ -1,9 +1,9 @@
-package com.hkbae.FinancialProduct.repository
+package com.hkbae.financialProduct.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.hkbae.FinancialProduct.service.UserApiManager
-import com.hkbae.FinancialProduct.model.User
+import com.hkbae.financialProduct.service.UserApiManager
+import com.hkbae.financialProduct.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

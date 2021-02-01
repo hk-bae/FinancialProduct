@@ -1,12 +1,10 @@
-package com.hkbae.FinancialProduct.service
+package com.hkbae.financialProduct.service
 
-import com.hkbae.FinancialProduct.model.FinancialProduct
-import com.hkbae.FinancialProduct.model.User
-import com.hkbae.FinancialProduct.model.UserInfo
+import com.hkbae.financialProduct.model.FinancialProduct
+import com.hkbae.financialProduct.model.UserInfo
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface UserInfoAPI {
 

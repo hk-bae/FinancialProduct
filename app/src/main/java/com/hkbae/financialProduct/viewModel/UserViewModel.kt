@@ -1,13 +1,10 @@
-package com.hkbae.FinancialProduct.viewModel
+package com.hkbae.financialProduct.viewModel
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import com.hkbae.FinancialProduct.model.User
-import com.hkbae.FinancialProduct.repository.UserRepository
+import com.hkbae.financialProduct.model.User
+import com.hkbae.financialProduct.repository.UserRepository
 
 
 class UserViewModel(application : Application) : AndroidViewModel(application){

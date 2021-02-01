@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct.service
+package com.hkbae.financialProduct.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

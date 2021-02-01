@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct
+package com.hkbae.financialProduct
 
 import org.junit.Test
 

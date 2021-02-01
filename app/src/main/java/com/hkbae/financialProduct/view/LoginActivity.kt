@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct.view
+package com.hkbae.financialProduct.view
 
 import android.content.Context
 import android.content.Intent
@@ -9,10 +9,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.hkbae.FinancialProduct.MainActivity
-import com.hkbae.FinancialProduct.databinding.ActivityLoginBinding
-import com.hkbae.FinancialProduct.model.User
-import com.hkbae.FinancialProduct.viewModel.UserViewModel
+import com.hkbae.financialProduct.MainActivity
+import com.hkbae.financialProduct.databinding.ActivityLoginBinding
+import com.hkbae.financialProduct.model.User
+import com.hkbae.financialProduct.viewModel.UserViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
 

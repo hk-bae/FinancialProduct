@@ -1,7 +1,7 @@
-package com.hkbae.FinancialProduct.service
+package com.hkbae.financialProduct.service
 
 
-import com.hkbae.FinancialProduct.model.User
+import com.hkbae.financialProduct.model.User
 import retrofit2.Call
 import retrofit2.http.*
 

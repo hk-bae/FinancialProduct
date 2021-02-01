@@ -1,4 +1,4 @@
-package com.hkbae.FinancialProduct.model
+package com.hkbae.financialProduct.model
 
 //금융상품에 대한 abstract class
 //Deposit(정기예금), SavingsData(적금)이 이를 상속받는다.
