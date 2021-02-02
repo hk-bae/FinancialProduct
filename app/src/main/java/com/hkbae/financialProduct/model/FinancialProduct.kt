@@ -10,6 +10,31 @@ open class FinancialProduct(
     var option: Option=Option()
 ):Serializable {
     var maturityPayment : Int=0
+
+
+    fun prdtInfoAsText():String{
+        val prdtInfo= "기본 금리 : ${option.intr_rate} %\n" +
+                "최고 금리 : ${option.intr_rate2} %\n" +
+                "만기 지급액 : ${maturityPayment} 원"
+
+        return prdtInfo
+
+    }
+
+    fun detailInfoAsText():String{
+        val detailInfo="은행명 : ${baseInfo.kor_co_nm}\n\n" +
+                "상품명 : ${baseInfo.fin_prdt_nm}\n\n" +
+                "가입경로 : ${baseInfo.join_way}\n\n"+
+                "가입대상 : ${baseInfo.join_member}\n\n"+
+                "우대조건 : ${baseInfo.spcl_cnd}\n\n" +
+                "기타 유의사항 : ${baseInfo.etc_note}\n\n" +
+                "최고한도 : ${baseInfo.max_limit}\n\n" +
+                "기본금리 : ${option.intr_rate}\n\n" +
+                "최고금리 : ${option.intr_rate2}\n\n" +
+                "저축기간 : ${option.save_trm}\n\n" +
+                "저축방법 (단리 : S , 복리 : M) : ${option.intr_rate_type}"
+        return detailInfo
+    }
 }
 
 

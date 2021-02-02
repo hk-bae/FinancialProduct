@@ -21,31 +21,14 @@ class RecommendedListViewModel(application: Application) : AndroidViewModel(appl
 
         when(mode){
             0->{ //기본 금리 순 정렬
-                 liveData.value=liveData.value?.sortedWith(Comparator<FinancialProduct>{ p1,p2->
-                     when{
-                         p2.option.intr_rate>p1.option.intr_rate -> 1
-                         p2.option.intr_rate<p1.option.intr_rate -> -1
-                         else->0
-                     }
-                 }) as ArrayList<FinancialProduct>
-            }
+                liveData.value=ArrayList<FinancialProduct>(liveData.value?.sortedByDescending{it.option.intr_rate}!!)
+          }
+
             1->{ //최고 금리 순
-                liveData.value=liveData.value?.sortedWith(Comparator<FinancialProduct>{ p1,p2->
-                    when{
-                        p2.option.intr_rate2>p1.option.intr_rate2 -> 1
-                        p2.option.intr_rate2<p1.option.intr_rate2 -> -1
-                        else->0
-                    }
-                }) as ArrayList<FinancialProduct>
+                liveData.value=ArrayList<FinancialProduct>(liveData.value?.sortedByDescending{it.option.intr_rate2}!!)
             }
             2->{
-                liveData.value=liveData.value?.sortedWith(Comparator<FinancialProduct>{ p1,p2->
-                    when{
-                        p2.maturityPayment>p1.maturityPayment -> 1
-                        p2.maturityPayment<p1.maturityPayment -> -1
-                        else->0
-                    }
-                }) as ArrayList<FinancialProduct>
+                liveData.value=ArrayList<FinancialProduct>(liveData.value?.sortedByDescending{it.maturityPayment}!!)
             }
         }
 

@@ -226,12 +226,15 @@
                 android:id="@+id/register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="다음"
+                android:text="가입하기"
                 android:textSize="24dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:background="@color/colorPrimary"
-                android:onClick="onClickRegisterBtn"/>
+                android:onClick="onClickRegisterBtn"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
 

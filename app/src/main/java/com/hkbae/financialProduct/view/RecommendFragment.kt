@@ -79,7 +79,7 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
         //추천 받기 버튼 리스너
         binding.recommendBtn.setOnClickListener(this)
 
-        val observer = Observer<ArrayList<FinancialProduct>>{ user->
+        val observer = Observer<ArrayList<FinancialProduct>>{ it ->
             val intent= Intent(binding.root.context,RecommendActivity::class.java)
             intent.putExtra("list",recommendedListViewModel.liveData.value)
             startActivity(intent)

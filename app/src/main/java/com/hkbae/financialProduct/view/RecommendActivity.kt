@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hkbae.financialProduct.R
@@ -27,18 +28,23 @@ class RecommendActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        model.liveData.observe(this, Observer<List<FinancialProduct>>{
+
+            val adapter =RecyclerViewAdapter(model.liveData.value!!,this)
+
+            binding.recyclerView.adapter=adapter
+            binding.recyclerView.layoutManager=LinearLayoutManager(this@RecommendActivity)
+
+        })
+
         init()
 
     }
 
-    fun init(){
+    private fun init(){
+
         model.liveData.value= intent.getSerializableExtra("list") as ArrayList<FinancialProduct>?
         model.sortList(0) //초기 기본 금리 순 정렬
-
-        val adapter =RecyclerViewAdapter(model.liveData.value!!, LayoutInflater.from(this@RecommendActivity),this)
-
-        binding.recyclerView.adapter=adapter
-        binding.recyclerView.layoutManager=LinearLayoutManager(this@RecommendActivity)
 
         binding.sortButton.setOnCheckedChangeListener{group: RadioGroup?, checkedId: Int ->
             when(checkedId){
