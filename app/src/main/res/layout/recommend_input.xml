@@ -264,7 +264,10 @@
                     android:gravity="center"
                     android:textColor="#ffffff"
                     android:background="@color/colorPrimary"
-                    android:onClick="onClickRecommend"/>
+                    android:onClick="onClickRecommend"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"/>
 
 
             </LinearLayout>

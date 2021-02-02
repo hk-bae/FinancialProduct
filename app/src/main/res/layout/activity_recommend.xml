@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.RecommendActivity"
     android:orientation="vertical">
-    </LinearLayout>
-</layout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:onClick="onClickBackButton"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:text="예적금 맞춤 추천"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/sort_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <RadioButton
+            android:id="@+id/intr_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기본 금리 순"
+            android:checked="true"/>
+        <RadioButton
+            android:id="@+id/intr_rate2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최고 금리 순"/>
+
+        <RadioButton
+            android:id="@+id/maturity_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="만기 지급액 순" />
+    </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"/>
+
+
+
+</LinearLayout>
 
 

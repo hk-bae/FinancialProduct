@@ -118,5 +118,9 @@ class RegisterActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    fun onClickBackButton(view: View) {
+        super.onBackPressed()
+    }
+
 
 }

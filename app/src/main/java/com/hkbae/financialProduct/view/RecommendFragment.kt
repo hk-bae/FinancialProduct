@@ -3,6 +3,7 @@ package com.hkbae.financialProduct.view
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +12,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hkbae.financialProduct.R
 import com.hkbae.financialProduct.databinding.RecommendInputBinding
+import com.hkbae.financialProduct.model.BaseInfo
+import com.hkbae.financialProduct.model.FinancialProduct
+import com.hkbae.financialProduct.model.User
 import com.hkbae.financialProduct.model.UserInfo
+import com.hkbae.financialProduct.service.UserApiManager
+import com.hkbae.financialProduct.service.UserInfoApiManager
+import com.hkbae.financialProduct.viewModel.RecommendedListViewModel
 import com.hkbae.financialProduct.viewModel.UserInfoViewModel
+import com.hkbae.financialProduct.viewModel.UserViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener {
 
@@ -24,7 +37,7 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
     private lateinit var model : UserInfoViewModel
     private lateinit var availableCitiesDialog : AlertDialog
     private lateinit var conditionsDialog:AlertDialog
-
+    private lateinit var  recommendedListViewModel : RecommendedListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,11 +46,11 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
     ): View? {
 
         _binding = RecommendInputBinding.inflate(inflater,container,false)
-        model = ViewModelProvider(this).get(UserInfoViewModel::class.java)
-        initDialog()
         val view= binding.root
-
-       init()
+        model = ViewModelProvider(this).get(UserInfoViewModel::class.java)
+        recommendedListViewModel=ViewModelProvider(this).get(RecommendedListViewModel::class.java)
+        initDialog()
+        init()
 
         return view
     }
@@ -66,6 +79,14 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
         //추천 받기 버튼 리스너
         binding.recommendBtn.setOnClickListener(this)
 
+        val observer = Observer<ArrayList<FinancialProduct>>{ user->
+            val intent= Intent(binding.root.context,RecommendActivity::class.java)
+            intent.putExtra("list",recommendedListViewModel.liveData.value)
+            startActivity(intent)
+        }
+
+        recommendedListViewModel.liveData.observe(viewLifecycleOwner,observer)
+
     }
 
     override fun onClick(view : View){
@@ -88,25 +109,22 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
         else if(joinPath==null){
             Toast.makeText(view.context,"가입경로를 선택해 주세요.", Toast.LENGTH_LONG).show()
         }
-        else{
-            model.liveData.value?.months=saveTermStr.toInt()
-            model.liveData.value?.amounts=amountsStr.toInt()
-            model.liveData.value?.sex=when(sexRadioGroup.checkedRadioButtonId){
-                R.id.male ->0
-                else ->1
+        else {
+            model.liveData.value?.months = saveTermStr.toInt()
+            model.liveData.value?.amounts = amountsStr.toInt()
+            model.liveData.value?.sex = when (sexRadioGroup.checkedRadioButtonId) {
+                R.id.male -> 0
+                else -> 1
             }
-            model.liveData.value?.joinPath=joinPath
+            model.liveData.value?.joinPath = joinPath
 
             //sharedPreference에 저장된 born을 가져와서 나이 세팅
-            val sharedPreferences=activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
-            val born =sharedPreferences?.getString("born",null)
-            model.liveData.value?.setAge(born!!)
+            val sharedPreferences = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+            val born = sharedPreferences?.getString("born", null)
+            model.setAge(born!!)
 
-            model.getRecommendedList()
+            recommendedListViewModel.getRecommendedList(model.liveData.value!!)
         }
-
-
-
 
         Log.d("recommend_test","productType : "+model.liveData.value?.productType)
         Log.d("recommend_test","months : "+model.liveData.value?.months)
@@ -175,7 +193,7 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
                 model.liveData.value?.conditions=inputConditions
                 for(i in 0 until conditionsBooleanArr.size){
                     if(conditionsBooleanArr[i]){
-                        model.liveData.value?.addConditions(i) //우대 조건 추가
+                        model.addConditions(i) //우대 조건 추가
                         Log.d("recommend_test",conditions[i].toString())
                     }
                 }

@@ -4,17 +4,22 @@ import com.hkbae.financialProduct.model.FinancialProduct
 import com.hkbae.financialProduct.model.UserInfo
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface UserInfoAPI {
 
-    @GET("/recommend/")
+    @POST("/recommend/")
     fun getRecommendedList(
         @Body userInfo : UserInfo
     ) : Call<List<FinancialProduct>>
 
+    @POST("/recommend/test/")
+    fun test(
+        @Body financialProduct: FinancialProduct
+    ):Call<FinancialProduct>
+
     companion object {
-        const val SERVER_URL: String = "http://172.26.19.57:8080"
+        const val SERVER_URL: String = "http://172.26.26.72:8080"
     }
 
 

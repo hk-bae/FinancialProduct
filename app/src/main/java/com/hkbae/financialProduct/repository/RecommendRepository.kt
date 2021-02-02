@@ -9,10 +9,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserInfoRepository(var userInfoLiveData : MutableLiveData<UserInfo>) {
+class RecommendRepository(var recommendedLiveData:MutableLiveData<ArrayList<FinancialProduct>>) {
 
-    fun getRecommendedList(){
-        UserInfoApiManager.service.getRecommendedList(userInfoLiveData.value!!).enqueue(object :
+    fun getRecommendedList(userInfo : UserInfo){
+        UserInfoApiManager.service.getRecommendedList(userInfo).enqueue(object :
             Callback<List<FinancialProduct>>{
             override fun onResponse(
                 call: Call<List<FinancialProduct>>,
@@ -20,7 +20,8 @@ class UserInfoRepository(var userInfoLiveData : MutableLiveData<UserInfo>) {
             ) {
                 if(response.isSuccessful){
                     //통신 성공
-                    
+                    recommendedLiveData.value=response.body() as ArrayList<FinancialProduct>
+
                 }else{
                     Log.d("recommend",response.code().toString())
                 }
@@ -32,4 +33,6 @@ class UserInfoRepository(var userInfoLiveData : MutableLiveData<UserInfo>) {
 
         })
     }
+
+
 }
