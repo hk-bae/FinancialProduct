@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="financialProduct"
+            type="com.hkbae.financialProduct.model.FinancialProduct" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:background="#F3F3F3"
+        android:padding="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:background="@color/colorAccent"
+            android:padding="18dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/kor_co_nm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    text="@{financialProduct.baseInfo.kor_co_nm}"
+                    tools:text="1. 신한은행"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:id="@+id/fin_prdt_nm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@{financialProduct.baseInfo.fin_prdt_nm}"
+                    tools:text="희망 적금"
+                    android:textSize="16dp"
+                    android:layout_toRightOf="@+id/kor_co_nm"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/prdt_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="@{financialProduct.prdtInfoAsText}"
+                    tools:text="기본 금리 : 2.4%\n최고 금리 : 2.7%\n만기지급액 : 50000원"
+                    android:layout_alignParentStart="true"/>
+
+                <Button
+                    android:id="@+id/detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="상세보기"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</layout>
