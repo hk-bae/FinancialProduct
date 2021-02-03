@@ -19,8 +19,8 @@ class RecommendRepository(var recommendedLiveData:MutableLiveData<ArrayList<Fina
                 response: Response<List<FinancialProduct>>
             ) {
                 if(response.isSuccessful){
-                    //통신 성공
-                    recommendedLiveData.value=response.body() as ArrayList<FinancialProduct>
+                        //통신 성공
+                        recommendedLiveData.value=response.body() as ArrayList<FinancialProduct>
 
                 }else{
                     Log.d("recommend",response.code().toString())

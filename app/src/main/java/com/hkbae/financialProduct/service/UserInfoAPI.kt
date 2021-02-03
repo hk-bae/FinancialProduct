@@ -13,11 +13,6 @@ interface UserInfoAPI {
         @Body userInfo : UserInfo
     ) : Call<List<FinancialProduct>>
 
-    @POST("/recommend/test/")
-    fun test(
-        @Body financialProduct: FinancialProduct
-    ):Call<FinancialProduct>
-
     companion object {
         const val SERVER_URL: String = "http://172.26.26.72:8080"
     }

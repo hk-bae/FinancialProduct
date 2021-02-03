@@ -24,7 +24,7 @@ class RecommendActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityRecommendBinding.inflate(layoutInflater)
-        model=ViewModelProvider(this).get(RecommendedListViewModel::class.java)
+        model=ViewModelProvider(this).get("recommendActivity",RecommendedListViewModel::class.java)
         val view = binding.root
         setContentView(view)
 
@@ -38,6 +38,7 @@ class RecommendActivity : AppCompatActivity() {
         })
 
         init()
+
 
     }
 
@@ -60,4 +61,5 @@ class RecommendActivity : AppCompatActivity() {
     fun onClickBackButton(view: View) {
         super.onBackPressed()
     }
+
 }

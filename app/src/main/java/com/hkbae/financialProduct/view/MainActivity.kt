@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.android.material.tabs.TabLayout
 import com.hkbae.financialProduct.adapter.MyPagerAdapter
@@ -16,8 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("lifeCycle_test","onCreate 호출됨")
         binding= ActivityMainBinding.inflate(layoutInflater)
-
         val view=binding.root
         setContentView(view)
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.addTab(tab_layout.newTab().setText("정기예금 추천"))
         binding.tabLayout.addTab(tab_layout.newTab().setText("적금 추천"))
 
-        val pagerAdapter= MyPagerAdapter(supportFragmentManager,3)
+        val pagerAdapter= MyPagerAdapter(supportFragmentManager,2)
         binding.viewPager.adapter=pagerAdapter
         binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
 

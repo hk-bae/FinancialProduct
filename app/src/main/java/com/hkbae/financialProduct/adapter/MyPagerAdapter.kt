@@ -1,5 +1,7 @@
 package com.hkbae.financialProduct.adapter
 
+import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -16,10 +18,15 @@ class MyPagerAdapter(
     }
 
     override fun getItem(position: Int): Fragment {
+
+        val fragment=RecommendFragment()
+
         when(position){
-            1-> return RecommendFragment(1)//적금
-            else -> return RecommendFragment(0) //예금
+            0 -> fragment.productType=0
+            1->  fragment.productType=1
         }
+        Log.d("lifeCycle_test"," return fragment - ${fragment.productType}")
+        return fragment
     }
 
 

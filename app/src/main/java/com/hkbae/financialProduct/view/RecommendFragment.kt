@@ -30,41 +30,78 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener {
+class RecommendFragment : Fragment(),View.OnClickListener {
 
-    private  var _binding : RecommendInputBinding?=null
+    private var _binding : RecommendInputBinding?=null
     private val binding get() = _binding!!
     private lateinit var model : UserInfoViewModel
+    private lateinit var  recommendedListViewModel : RecommendedListViewModel
     private lateinit var availableCitiesDialog : AlertDialog
     private lateinit var conditionsDialog:AlertDialog
-    private lateinit var  recommendedListViewModel : RecommendedListViewModel
+    var productType : Int =-1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(savedInstanceState!=null){
+            productType = savedInstanceState.getInt("product_type",-2)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        Log.d("lifeCycle_test","onCreateView 호출됨")
         _binding = RecommendInputBinding.inflate(inflater,container,false)
-        val view= binding.root
-        model = ViewModelProvider(this).get(UserInfoViewModel::class.java)
-        recommendedListViewModel=ViewModelProvider(this).get(RecommendedListViewModel::class.java)
-        initDialog()
-        init()
 
-        return view
+        model = ViewModelProvider(requireActivity()).get(productType.toString(),UserInfoViewModel::class.java)
+        recommendedListViewModel=ViewModelProvider(requireActivity()).get(productType.toString(),RecommendedListViewModel::class.java)
+        model.liveData.value?.productType=productType //정기예금=0, 적금=1 productType 설정
+
+
+        return binding.root
     }
 
-    private fun init(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("lifeCycle_test","onViewCreated 호출됨-fragment : ${productType}")
+        super.onViewCreated(view, savedInstanceState)
+
+        initDialog()
+        initView()
+    }
+
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        Log.d("lifeCycle_test","onActivitiyCreated 호출됨")
+
+        //sharedPreference에 저장된 born을 가져와서 나이 세팅
+        val sharedPreferences = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
+        val born = sharedPreferences?.getString("born", null)
+        model.setAge(born!!)
+
+        val observer = Observer<ArrayList<FinancialProduct>>{ it ->
+            val intent= Intent(binding.root.context,RecommendActivity::class.java)
+            intent.putExtra("list",recommendedListViewModel.liveData.value)
+            Log.d("lifeCycle_test","observer 호출됨")
+            startActivity(intent)
+        }
+
+        recommendedListViewModel.liveData.observe(viewLifecycleOwner,observer)
+
+
+
+    }
+
+    private fun initView(){
 
         //productType에 따라 amounts 이름 설정
         when(productType){
-            1-> binding.amountsName.setText("월 납입 금액")
-            else -> binding.amountsName.setText("예치금")
+            0 -> binding.amountsName.setText("예치금")
+            1 -> binding.amountsName.setText("월 납입 금액")
         }
 
-        //productType
-        model.liveData.value?.productType=productType //정기예금=0, 적금=1
 
         //방문 가능 지역 선택 버튼 클릭 리스너
         binding.visitableArea.setOnClickListener {
@@ -78,14 +115,6 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
 
         //추천 받기 버튼 리스너
         binding.recommendBtn.setOnClickListener(this)
-
-        val observer = Observer<ArrayList<FinancialProduct>>{ it ->
-            val intent= Intent(binding.root.context,RecommendActivity::class.java)
-            intent.putExtra("list",recommendedListViewModel.liveData.value)
-            startActivity(intent)
-        }
-
-        recommendedListViewModel.liveData.observe(viewLifecycleOwner,observer)
 
     }
 
@@ -118,30 +147,9 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
             }
             model.liveData.value?.joinPath = joinPath
 
-            //sharedPreference에 저장된 born을 가져와서 나이 세팅
-            val sharedPreferences = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
-            val born = sharedPreferences?.getString("born", null)
-            model.setAge(born!!)
+
 
             recommendedListViewModel.getRecommendedList(model.liveData.value!!)
-        }
-
-        Log.d("recommend_test","productType : "+model.liveData.value?.productType)
-        Log.d("recommend_test","months : "+model.liveData.value?.months)
-        Log.d("recommend_test","amounts : "+model.liveData.value?.amounts)
-        Log.d("recommend_test","age : "+model.liveData.value?.age)
-        Log.d("recommend_test","sex : "+model.liveData.value?.sex)
-
-        model.liveData.value?.joinPath?.forEach {
-            Log.d("recommend_test","joinPath : : "+it)
-        }
-
-        model.liveData.value?.cities?.forEach {
-            Log.d("recommend_test","cities : "+it.cityName)
-        }
-
-        model.liveData.value?.conditions?.forEach {
-        Log.d("recommend_test","conditions : "+it)
         }
 
     }
@@ -219,7 +227,7 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
 
         var check : Boolean = false
         //하나라도 체크 되었으면 check = true
-        for( i in 0 until joinPath.size-1){
+        for( i in 0 until joinPath.size){
             if(joinPath[i]!=null) check=true
         }
 
@@ -228,10 +236,27 @@ class RecommendFragment(val productType : Int) : Fragment(),View.OnClickListener
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.d("lifeCycle_test","onSaveInstanceState 호출됨 , fragment-${productType}")
+        super.onSaveInstanceState(outState)
+
+        val data = productType
+        outState.putInt("product_type",data)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+        Log.d("lifeCycle_test","onDestroyView 호출됨 , fragment-${productType}")
+
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("lifeCycle_test","onDestroy 호출됨 , fragment-${productType}")
+    }
+
+
 
 }

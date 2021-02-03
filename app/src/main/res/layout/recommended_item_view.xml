@@ -58,25 +58,34 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
 
-            <TextView
-                android:id="@+id/prdt_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:text="@{financialProduct.prdtInfoAsText}"
-                tools:text="기본 금리 : 2.4%\n최고 금리 : 2.7%\n만기지급액 : 50000원" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/detail_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="상세보기"
-                android:textSize="16dp"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:background="@color/colorPrimaryDark"
-                android:layout_gravity="center_vertical|right"/>
+                <TextView
+                    android:id="@+id/prdt_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:text="@{financialProduct.prdtInfoAsText}"
+                    tools:text="기본 금리 : 2.4%\n최고 금리 : 2.7%\n만기지급액 : 50000원"
+                    android:layout_alignParentStart="true"/>
+
+                <Button
+                    android:id="@+id/detail_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="상세보기"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:background="@color/colorPrimaryDark"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"/>
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
