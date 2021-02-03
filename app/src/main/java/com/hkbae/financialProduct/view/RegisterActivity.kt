@@ -54,6 +54,7 @@ class RegisterActivity : AppCompatActivity() {
             }else{ //사용할 수 있는 id이면 DB에 추가
                 model.postUser()
                 Toast.makeText(this@RegisterActivity,"가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+                finish()
             }
             Log.d("test","bye : ${user.id}")
             Log.d("test","name :${user.name}")
