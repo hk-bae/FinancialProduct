@@ -13,7 +13,11 @@ class RecommendedListViewModel(application: Application) : AndroidViewModel(appl
 
 
     fun getRecommendedList(userInfo:UserInfo){
-        userRepository.getRecommendedList(userInfo)
+        if(userInfo.productType==0){
+            userRepository.getRecommendedListDeposit(userInfo)
+        }else{
+            userRepository.getRecommendedListSavingsData(userInfo)
+        }
     }
 
     //mode 0 : 기본금리순, mode 1 : 최고금리순, mode 2: 만기지급액 순 정렬

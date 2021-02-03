@@ -5,7 +5,7 @@ import java.io.Serializable
 //금융상품에 대한 abstract class
 //Deposit(정기예금), SavingsData(적금)이 이를 상속받는다.
 //멤버 필드로 BaseInfo(기본정보), Option(추가정보)를 갖는다.
-open class FinancialProduct(
+abstract class FinancialProduct(
     var baseInfo: BaseInfo=BaseInfo(),
     var option: Option=Option()
 ):Serializable {
