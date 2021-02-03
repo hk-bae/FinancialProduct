@@ -1,7 +1,6 @@
 package com.hkbae.financialProduct.service
 
 import com.hkbae.financialProduct.model.Deposit
-import com.hkbae.financialProduct.model.FinancialProduct
 import com.hkbae.financialProduct.model.SavingsData
 import com.hkbae.financialProduct.model.UserInfo
 import retrofit2.Call

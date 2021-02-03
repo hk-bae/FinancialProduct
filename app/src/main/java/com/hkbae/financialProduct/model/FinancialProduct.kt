@@ -15,7 +15,7 @@ abstract class FinancialProduct(
     fun prdtInfoAsText():String{
         val prdtInfo= "기본 금리 : ${option.intr_rate} %\n" +
                 "최고 금리 : ${option.intr_rate2} %\n" +
-                "만기 지급액 : ${maturityPayment} 원"
+                "만기 지급액 : ${maturityPayment.toString()} 원"
 
         return prdtInfo
 
