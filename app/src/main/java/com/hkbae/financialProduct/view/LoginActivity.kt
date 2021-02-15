@@ -28,22 +28,27 @@ class LoginActivity : AppCompatActivity() {
         val view=binding.root
         setContentView(view)
 
-        initLogin()
+        initLoginActivity()
 
-        //sharedPreference에 저장된 로그인 기록이 있으면 자동 로그인
-        val sharedPreference = getSharedPreferences("user",Context.MODE_PRIVATE)
-        val id = sharedPreference.getString("id",null)
-        var password=sharedPreference.getString("password",null)
-        if(id!=null && password !=null){
-            model.login(id,password)
+        if(model.liveData.value==null) {
+            fetchUserData()
         }
-
 
     }
 
-    private fun initLogin(){
+    private fun fetchUserData(){
+        //sharedPreference에 저장된 로그인 기록이 있으면 자동 로그인
+        val sharedPreference = getSharedPreferences("user", Context.MODE_PRIVATE)
+        val id = sharedPreference.getString("id", null)
+        var password = sharedPreference.getString("password", null)
+        if (id != null && password != null) {
+            model.login(id, password)
+        }
+    }
+
+    private fun initLoginActivity(){
         val observer = Observer<User>{ user->
-            if(user.id!=null && !user.id.isEmpty()){
+            if(user.id.isNotEmpty()){
                 //로그인 성공 시 main 화면으로 이동
 
                     Log.d("login",user.id)
@@ -90,7 +95,15 @@ class LoginActivity : AppCompatActivity() {
     //회원가입 화면으로 전환
     fun onClickRegisterBtn(view: View) {
         val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent,100)
+    }
+
+    //회원가입 성공 시 아이디 비밀번호에 자동 입력해주기
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==100 && resultCode== RESULT_OK){
+
+        }
     }
 
 }
