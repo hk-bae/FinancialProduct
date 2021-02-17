@@ -103,6 +103,10 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==100 && resultCode== RESULT_OK){
 
+            val newUser : User = data?.getSerializableExtra("user") as User
+            binding.userId.setText(newUser.id)
+            binding.userPassword.setText(newUser.password)
+
         }
     }
 

@@ -1,280 +1,272 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:scrollbars="none"
+        android:fillViewport="true">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:fillViewport="true">
+            android:orientation="vertical"
+            android:padding="40dp">
+
+            <ImageView
+                android:id="@+id/check1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_round_not_done_24"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/save_term_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가입기간"
+                android:textSize="18dp"
+                android:layout_alignBaseline="@+id/check1"
+                android:layout_toRightOf="@+id/check1"
+                android:layout_marginLeft="8dp"/>
+
+            <EditText
+                android:id="@+id/save_term"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:hint="0 개월"
+                android:inputType="numberDecimal"
+                android:layout_alignLeft="@id/check1"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/save_term_text"/>
+
+
+            <ImageView
+                android:id="@+id/check2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check1"
+                android:layout_below="@+id/save_term"
+                android:src="@drawable/ic_round_not_done_24"/>
+
+            <TextView
+                android:id="@+id/amounts_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/check2"
+                android:layout_toRightOf="@+id/check2"
+                android:layout_below="@+id/save_term"
+                android:layout_marginLeft="8dp"
+                android:text=""
+                android:textSize="18dp" />
+
+
+
+            <EditText
+                android:id="@+id/amounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="8dp"
+                android:hint="0 원"
+                android:inputType="numberDecimal"
+                android:layout_below="@id/amounts_name"/>
+
+            <ImageView
+                android:id="@+id/check3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check1"
+                android:layout_below="@+id/amounts"
+                android:src="@drawable/ic_round_not_done_24"/>
+
+            <TextView
+                android:id="@+id/sex_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/check3"
+                android:layout_toRightOf="@+id/check3"
+                android:layout_below="@+id/amounts"
+                android:layout_marginLeft="8dp"
+                android:text="성별"
+                android:textSize="18dp" />
+
+
+            <RadioGroup
+                android:id="@+id/sex_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sex_text"
+                android:layout_alignLeft="@id/check1"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="남자" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여자" />
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/check4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check1"
+                android:layout_below="@+id/sex_radio_group"
+                android:src="@drawable/ic_round_not_done_24"/>
+
+            <TextView
+                android:id="@+id/join_path_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/check4"
+                android:layout_toRightOf="@+id/check4"
+                android:layout_below="@+id/sex_radio_group"
+                android:layout_marginLeft="8dp"
+                android:text="가입경로"
+                android:textSize="18dp" />
+
+
 
             <LinearLayout
+                android:id="@+id/check_box_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/join_path_text">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="40dp">
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/office"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영업점" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="모바일" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/internet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="인터넷" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="가입기간"
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/save_term"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:hint="0 개월"
-                        android:inputType="numberDecimal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
-
-                        <TextView
-                            android:id="@+id/amounts_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:id="@+id/amounts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:hint="0 원"
-                        android:inputType="numberDecimal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="성별"
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <RadioGroup
-                        android:id="@+id/sex_radio_group"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="30dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/male"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="남자" />
-
-                        <RadioButton
-                            android:id="@+id/female"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="여자" />
-                    </RadioGroup>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="가입경로"
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/office"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="영업점" />
-
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/mobile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="모바일" />
-
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/internet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="인터넷" />
-
-                        <androidx.appcompat.widget.AppCompatCheckBox
-                            android:id="@+id/telephone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:text="콜센터" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="은행 방문 가능 지역"
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/visitable_area"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="선택하기"
-                        android:textColor="#ffffff"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:src="@drawable/ic_round_not_done_24" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="우대조건"
-                            android:textSize="18dp" />
-
-
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/preferential_condition"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="30dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:text="선택하기"
-                        android:textColor="#ffffff"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/recommend_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="추천 받기"
-                    android:textSize="24dp"
-                    android:gravity="center"
-                    android:textColor="#ffffff"
-                    android:background="@color/colorPrimary"
-                    android:onClick="onClickRecommend"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="20dp"/>
-
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/telephone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="콜센터" />
 
             </LinearLayout>
 
 
+            <ImageView
+                android:id="@+id/check5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check1"
+                android:layout_below="@+id/check_box_layout"
+                android:src="@drawable/ic_round_not_done_24"/>
 
-        </ScrollView>
+            <TextView
+                android:id="@+id/visitable_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/check5"
+                android:layout_toRightOf="@+id/check5"
+                android:layout_below="@+id/check_box_layout"
+                android:layout_marginLeft="8dp"
+                android:text="가입경로"
+                android:textSize="18dp" />
 
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/visitable_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/visitable_text"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_shape_round"
+                android:text="선택하기"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/check6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check1"
+                android:layout_below="@+id/visitable_area"
+                android:src="@drawable/ic_round_not_done_24"/>
+
+            <TextView
+                android:id="@+id/condition_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/check6"
+                android:layout_toRightOf="@+id/check6"
+                android:layout_below="@+id/visitable_area"
+                android:layout_marginLeft="8dp"
+                android:text="우대조건"
+                android:textSize="18dp" />
+
+
+            <Button
+                android:id="@+id/preferential_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/condition_text"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_shape_round"
+                android:text="선택하기"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+
+
+
+
+            <Button
+                android:id="@+id/recommend_btn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="추천 받기"
+                android:textSize="24dp"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/btn_shape_round2"
+                android:onClick="onClickRecommend"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/preferential_condition"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

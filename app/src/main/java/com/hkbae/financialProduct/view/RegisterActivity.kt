@@ -1,6 +1,8 @@
 package com.hkbae.financialProduct.view
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -16,7 +19,7 @@ import com.hkbae.financialProduct.model.User
 import com.hkbae.financialProduct.viewModel.UserViewModel
 import com.hkbae.financialProduct.databinding.ActivityRegisterBinding
 import kotlinx.android.synthetic.main.activity_register.*
-import java.time.LocalDate
+import java.text.SimpleDateFormat
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -45,15 +48,24 @@ class RegisterActivity : AppCompatActivity() {
         ssb.setSpan(ForegroundColorSpan(Color.parseColor("#03A9F4")),9,13,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.registerInfoText.text=ssb
 
+        //toolbar 설정
+        setSupportActionBar(binding.toolbar)
+        val actionBar=supportActionBar
+        actionBar?.setDisplayShowTitleEnabled(false)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
         initDateListener()
 
         val observer = Observer<User>{ user->
             if(user.id=="-1"){ //id가 중복인 경우
-                Log.d("test","hi : ${user.id}")
                 Toast.makeText(this@RegisterActivity,"아이디가 중복됩니다.", Toast.LENGTH_SHORT).show()
-            }else{ //사용할 수 있는 id이면 DB에 추가
-                model.postUser()
+            }else{ //가입 성공
                 Toast.makeText(this@RegisterActivity,"가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show()
+
+                //가입 성공한 사용자 정보를 함께 보낸다.
+                val resultIntent = Intent()
+                resultIntent.putExtra("user",user)
+                setResult(Activity.RESULT_OK,resultIntent)
                 finish()
             }
             Log.d("test","bye : ${user.id}")
@@ -87,40 +99,42 @@ class RegisterActivity : AppCompatActivity() {
         }else if(password!=password2 || password.isEmpty()||password.length>20){ //password check
             Toast.makeText(this@RegisterActivity,"패스워드를 확인해 주세요.", Toast.LENGTH_SHORT).show()
         }else{
-            model.getUserCountById(User(id,password,name,born)) //id 중복 체크
+            model.postUser(User(id,password,name,born)) //id 중복 체크
         }
-
-
-
-
-
-
-
     }
 
 
     //날짜 선택 시 User의 born에 저장
     fun initDateListener(){
         callbackMethod = DatePickerDialog.OnDateSetListener{view, year, month, dayOfMonth ->
-            var born :String = "${year}.${month}.${dayOfMonth}"
+            var born :String = "${year}.${month+1}.${dayOfMonth}"
             binding.userInputBirthBtn.text=born
         }
     }
 
     //생년월일 선택 버튼
     fun onClickBirthBtn(view: View) {
-        var dialog : DatePickerDialog?=null
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val today : LocalDate = LocalDate.now()
-            dialog = DatePickerDialog(this,callbackMethod,today.year,today.monthValue,today.dayOfMonth)
-        } else {
-            dialog = DatePickerDialog(this,callbackMethod,2021,1,1)
-        }
+
+
+        val today = Calendar.getInstance().time
+        val year:Int =SimpleDateFormat("yyyy",Locale.getDefault()).format(today).toInt()
+        val month:Int =SimpleDateFormat("mm",Locale.getDefault()).format(today).toInt()
+        val day:Int =SimpleDateFormat("dd",Locale.getDefault()).format(today).toInt()
+
+        val dialog : DatePickerDialog = DatePickerDialog(this,callbackMethod,year,month,day)
+
         dialog.show()
     }
 
-    fun onClickBackButton(view: View) {
-        super.onBackPressed()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            android.R.id.home-> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 

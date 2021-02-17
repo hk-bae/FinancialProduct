@@ -7,35 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".view.RegisterActivity"
     android:orientation="vertical">
-
-    <LinearLayout
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:text="@string/app_name"
+            android:textSize="25dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                android:onClick="onClickBackButton"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/app_name"
-                android:textSize="25dp"
-                android:gravity="center"
-                android:textStyle="bold"/>
-        </FrameLayout>
-
-    </LinearLayout>
-
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/register_info_text"
@@ -65,162 +51,161 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="40dp"
-            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="40dp">
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_not_done_24"
-                    android:layout_marginRight="8dp"/>
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_round_not_done_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="이름"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/user_input_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="이름"
-                    android:textSize="18dp" />
+                    android:layout_marginBottom="30dp"
+                    android:hint="이름을 입력해 주세요." />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_round_not_done_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="생년월일"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/user_input_birth_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:hint="생년월일 선택하기"
+                    android:onClick="onClickBirthBtn" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_round_not_done_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아이디"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/user_input_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:hint="아이디를 입력해주세요." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_round_not_done_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="비밀번호"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/user_input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:hint="비밀번호를 입력해 주세요."
+                    android:inputType="textPassword" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_round_not_done_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="비밀번호 확인"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/user_input_password2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="비밀번호를 다시 입력해 주세요."
+                    android:inputType="textPassword" />
 
             </LinearLayout>
-
-        <EditText
-            android:id="@+id/user_input_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="이름을 입력해 주세요."
-            android:layout_marginBottom="30dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_not_done_24"
-                    android:layout_marginRight="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="생년월일"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/user_input_birth_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="생년월일 선택하기"
-                android:layout_marginBottom="30dp"
-                android:onClick="onClickBirthBtn"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_not_done_24"
-                    android:layout_marginRight="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="아이디"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/user_input_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="아이디를 입력해주세요."
-                android:layout_marginBottom="30dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_not_done_24"
-                    android:layout_marginRight="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="비밀번호"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/user_input_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호를 입력해 주세요."
-                android:layout_marginBottom="30dp"
-                android:inputType="textPassword"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_round_not_done_24"
-                    android:layout_marginRight="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="비밀번호 확인"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/user_input_password2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="비밀번호를 다시 입력해 주세요."
-                android:layout_marginBottom="30dp"
-                android:inputType="textPassword"/>
-
-        </LinearLayout>
-
 
             <Button
                 android:id="@+id/register_btn"
@@ -230,17 +215,14 @@
                 android:textSize="24dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn_shape_round"
                 android:onClick="onClickRegisterBtn"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginBottom="18dp"/>
 
         </LinearLayout>
-
+        
     </ScrollView>
-
-
-
 
 </LinearLayout>

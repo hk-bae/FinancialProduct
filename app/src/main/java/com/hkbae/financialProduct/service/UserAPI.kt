@@ -15,7 +15,7 @@ interface UserAPI {
     ) : Single<User>
 
     @GET("/user/exist/")
-    fun getUserCount( //id에 따른 사용자 정보 요청
+    fun getUserCountById( //id에 따른 사용자 정보 요청
         @Query("id") id : String
     ) : Single<Int>
 

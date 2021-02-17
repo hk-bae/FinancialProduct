@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.google.android.material.tabs.TabLayout
 import com.hkbae.financialProduct.adapter.MyPagerAdapter
@@ -22,47 +24,68 @@ class MainActivity : AppCompatActivity() {
         val view=binding.root
         setContentView(view)
 
-        init(view.context)
+        initMainActivity()
 
     }
 
-    private fun init(context : Context){
-        binding.tabLayout.addTab(tab_layout.newTab().setText("정기예금 추천"))
-        binding.tabLayout.addTab(tab_layout.newTab().setText("적금 추천"))
+    private fun initMainActivity(){
+
+        //toolbar
+        setSupportActionBar(binding.toolbar)
+        val actionbar = supportActionBar
+        actionbar?.setDisplayShowTitleEnabled(false)
 
         val pagerAdapter= MyPagerAdapter(supportFragmentManager,2)
         binding.viewPager.adapter=pagerAdapter
-        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+        binding.tabLayout.apply {
+            addTab(this.newTab().setText("정기예금 추천"))
+            addTab(this.newTab().setText("적금 추천"))
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    binding.viewPager.currentItem=tab!!.position
+                }
 
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                binding.viewPager.currentItem=tab!!.position
-            }
-        })
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+            })
+        }
 
         binding.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
     }
 
-    //로그아웃 기능
-    fun onClickLogout(view: View) {
-        val sharedPreferences = getSharedPreferences("user",Context.MODE_PRIVATE)
-        val editor=sharedPreferences.edit()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_item,menu)
+        return true
+    }
 
-        editor.apply{
-            remove("id")
-            remove("password")
-            remove("born")
-            remove("name")
-            commit()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.menu_logout ->{
+                val sharedPreferences = getSharedPreferences("user",Context.MODE_PRIVATE)
+                val editor=sharedPreferences.edit()
+
+                editor.apply{
+                    remove("id")
+                    remove("password")
+                    remove("born")
+                    remove("name")
+                    commit()
+                }
+
+                val intent = Intent(this@MainActivity,LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
 
-        val intent = Intent(this@MainActivity,LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+        return super.onOptionsItemSelected(item)
     }
+
 }

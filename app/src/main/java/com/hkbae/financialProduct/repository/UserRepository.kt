@@ -20,67 +20,14 @@ class UserRepository{
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
 
+    fun getUserCountById(id : String) : Single<Int> =
+        api.getUserCountById(id)
+            .observeOn(AndroidSchedulers.mainThread())
+             .subscribeOn(Schedulers.io())
 
-//    fun login_tmp(id:String, password:String){
-//
-//        //로그인 성공시 userLiveData의 value를 user로 변경.
-//            UserApiManager.service.login(id,password).enqueue(object: Callback<User>{
-//                override fun onResponse(call: Call<User>, response: Response<User>) {
-//                if(response.isSuccessful){
-//                    userLiveData.value=response.body()
-//                    Log.d("login_test",userLiveData.value?.id)
-//                    Log.d("login_test","통신 성공")
-//                }else{
-//                    Log.e("login_test",response.code().toString())
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<User>, t: Throwable) {
-//                    Log.e("login_test",t.message)
-//            }
-//
-//        })
-//    }
-
-    fun getUserCountById(user:User){}
-
-//    //DB에 id가 일치하는 사용자가 존재하는지 확인
-//    fun getUserCountById_tmp(user : User) {
-//
-//        UserApiManager.service.getUserCount(user.id).enqueue(object : Callback<Int> {
-//
-//            override fun onResponse(call: Call<Int>, response: Response<Int>) {
-//                if (response.isSuccessful) {
-//                    var count = response.body()
-//                    if(count!=0){
-//                        user.id="-1" //중복 id 체크 표시
-//                    }
-//                    userLiveData.value=user
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<Int>, t: Throwable) {
-//            }
-//        })
-//
-//    }
-
-    fun postUser(){}
-
-//    //서버에 Post요청
-//    fun postUser_tmp() {
-//
-//        UserApiManager.service.postUser(userLiveData.value!!).enqueue(object : Callback<Int> {
-//            override fun onResponse(call: Call<Int>, response: Response<Int>) {
-//                if (response.isSuccessful) {
-//                }
-//            }
-//            override fun onFailure(call: Call<Int>, t: Throwable) {
-//            }
-//        })
-//
-//    }
-
-
+    fun postUser(user : User) : Single<Int> =
+        api.postUser(user)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 
 }

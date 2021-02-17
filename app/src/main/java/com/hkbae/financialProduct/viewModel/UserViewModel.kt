@@ -25,12 +25,25 @@ class UserViewModel(application : Application) : AndroidViewModel(application){
             }
     }
 
-    fun getUserCountById(user: User){
-        userRepository.getUserCountById(user)
-    }
+    @SuppressLint("CheckResult")
+    fun postUser(user:User){
+        userRepository.getUserCountById(user.id) //id 중복 확인
+            .subscribe { count,throwable ->
+                if(count==0){ //중복된 id가 없는 경우
+                    userRepository.postUser(user).subscribe { success,throwable -> //사용자 계정 생성
+                        if(success==1){ //계정 생성 성공
+                            liveData.value=user
+                        }else{
+                            Log.d("Rx",throwable?.message ?: "정상 처리")
+                        }
+                    }
+                }else{ //중복된 id가 있는 경우
+                    user.id = "-1"
+                    liveData.value=user
+                }
 
-    fun postUser(){
-        userRepository.postUser()
+                Log.d("Rx",throwable?.message ?: "정상 처리")
+            }
     }
 
 }

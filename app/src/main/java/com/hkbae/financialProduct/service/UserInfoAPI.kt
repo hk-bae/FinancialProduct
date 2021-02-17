@@ -3,6 +3,7 @@ package com.hkbae.financialProduct.service
 import com.hkbae.financialProduct.model.Deposit
 import com.hkbae.financialProduct.model.SavingsData
 import com.hkbae.financialProduct.model.UserInfo
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -12,13 +13,13 @@ interface UserInfoAPI {
     @POST("/recommend/")
     fun getRecommendedListSavingsData(
         @Body userInfo : UserInfo
-    ) : Call<List<SavingsData>>
+    ) : Single<List<SavingsData>>
 
 
     @POST("/recommend/")
     fun getRecommendedListDeposit(
         @Body userInfo : UserInfo
-    ) : Call<List<Deposit>>
+    ) : Single<List<Deposit>>
 
     companion object {
         const val SERVER_URL: String = "http://172.24.191.107:8080"

@@ -18,6 +18,7 @@ import com.hkbae.financialProduct.viewModel.RecommendedListViewModel
 import kotlinx.android.synthetic.main.activity_recommend.*
 
 class RecommendActivity : AppCompatActivity() {
+
     private lateinit var binding : ActivityRecommendBinding
     private lateinit var model : RecommendedListViewModel
 
@@ -37,12 +38,12 @@ class RecommendActivity : AppCompatActivity() {
 
         })
 
-        init()
+        initRecommendActivity()
 
 
     }
 
-    private fun init(){
+    private fun initRecommendActivity(){
 
         model.liveData.value= intent.getSerializableExtra("list") as ArrayList<FinancialProduct>?
         model.sortList(0) //초기 기본 금리 순 정렬
@@ -54,7 +55,6 @@ class RecommendActivity : AppCompatActivity() {
                 R.id.maturity_payment -> model.sortList(2)
             }
         }
-
 
     }
 

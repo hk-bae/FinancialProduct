@@ -10,31 +10,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hkbae.financialProduct.R
 import com.hkbae.financialProduct.databinding.RecommendInputBinding
-import com.hkbae.financialProduct.model.BaseInfo
 import com.hkbae.financialProduct.model.FinancialProduct
-import com.hkbae.financialProduct.model.User
 import com.hkbae.financialProduct.model.UserInfo
-import com.hkbae.financialProduct.service.UserApiManager
-import com.hkbae.financialProduct.service.UserInfoApiManager
 import com.hkbae.financialProduct.viewModel.RecommendedListViewModel
 import com.hkbae.financialProduct.viewModel.UserInfoViewModel
-import com.hkbae.financialProduct.viewModel.UserViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RecommendFragment : Fragment(),View.OnClickListener {
 
     private var _binding : RecommendInputBinding?=null
     private val binding get() = _binding!!
-    private lateinit var model : UserInfoViewModel
+    private lateinit var userInfoViewModel : UserInfoViewModel
     private lateinit var  recommendedListViewModel : RecommendedListViewModel
     private lateinit var availableCitiesDialog : AlertDialog
     private lateinit var conditionsDialog:AlertDialog
@@ -55,10 +45,9 @@ class RecommendFragment : Fragment(),View.OnClickListener {
         Log.d("lifeCycle_test","onCreateView 호출됨")
         _binding = RecommendInputBinding.inflate(inflater,container,false)
 
-        model = ViewModelProvider(requireActivity()).get(productType.toString(),UserInfoViewModel::class.java)
+        userInfoViewModel = ViewModelProvider(requireActivity()).get(productType.toString(),UserInfoViewModel::class.java)
         recommendedListViewModel=ViewModelProvider(requireActivity()).get(productType.toString(),RecommendedListViewModel::class.java)
-        model.liveData.value?.productType=productType //정기예금=0, 적금=1 productType 설정
-
+        userInfoViewModel.liveData.value?.productType=productType //정기예금=0, 적금=1 productType 설정
 
         return binding.root
     }
@@ -79,9 +68,9 @@ class RecommendFragment : Fragment(),View.OnClickListener {
         //sharedPreference에 저장된 born을 가져와서 나이 세팅
         val sharedPreferences = activity?.getSharedPreferences("user", Context.MODE_PRIVATE)
         val born = sharedPreferences?.getString("born", null)
-        model.setAge(born!!)
+        userInfoViewModel.setAge(born!!)
 
-        val observer = Observer<ArrayList<FinancialProduct>>{ it ->
+        val observer = Observer<ArrayList<FinancialProduct>>{ _ ->
             val intent= Intent(binding.root.context,RecommendActivity::class.java)
             intent.putExtra("list",recommendedListViewModel.liveData.value)
             Log.d("lifeCycle_test","observer 호출됨")
@@ -90,32 +79,28 @@ class RecommendFragment : Fragment(),View.OnClickListener {
 
         recommendedListViewModel.liveData.observe(viewLifecycleOwner,observer)
 
-
-
     }
 
     private fun initView(){
 
         //productType에 따라 amounts 이름 설정
-        when(productType){
-            0 -> binding.amountsName.setText("예치금")
-            1 -> binding.amountsName.setText("월 납입 금액")
+        binding.apply{
+            when(productType){
+                0 -> amountsName.text="예치금"
+                1 -> amountsName.text="월 납입 금액"
+            }
+
+            visitableArea.setOnClickListener {
+                availableCitiesDialog.show()
+            }
+
+            preferentialCondition.setOnClickListener {
+                conditionsDialog.show()
+            }
+
         }
 
-
-        //방문 가능 지역 선택 버튼 클릭 리스너
-        binding.visitableArea.setOnClickListener {
-            availableCitiesDialog.show()
-        }
-
-        //우대 조건 선택 버튼 클릭 리스터
-        binding.preferentialCondition.setOnClickListener {
-            conditionsDialog.show()
-        }
-
-        //추천 받기 버튼 리스너
         binding.recommendBtn.setOnClickListener(this)
-
     }
 
     override fun onClick(view : View){
@@ -124,8 +109,6 @@ class RecommendFragment : Fragment(),View.OnClickListener {
         val amountsStr : String =binding.amounts.text.toString().trim()//예치금 또는 월 납입금액
         val sexRadioGroup=binding.sexRadioGroup
         val joinPath=getJoinPath()
-
-
 
         if(saveTermStr.isEmpty()){
             Toast.makeText(view.context,"가입기간을 입력해 주세요.", Toast.LENGTH_LONG).show()
@@ -139,17 +122,15 @@ class RecommendFragment : Fragment(),View.OnClickListener {
             Toast.makeText(view.context,"가입경로를 선택해 주세요.", Toast.LENGTH_LONG).show()
         }
         else {
-            model.liveData.value?.months = saveTermStr.toInt()
-            model.liveData.value?.amounts = amountsStr.toInt()
-            model.liveData.value?.sex = when (sexRadioGroup.checkedRadioButtonId) {
+            userInfoViewModel.liveData.value?.months = saveTermStr.toInt()
+            userInfoViewModel.liveData.value?.amounts = amountsStr.toInt()
+            userInfoViewModel.liveData.value?.sex = when (sexRadioGroup.checkedRadioButtonId) {
                 R.id.male -> 0
                 else -> 1
             }
-            model.liveData.value?.joinPath = joinPath
+            userInfoViewModel.liveData.value?.joinPath = joinPath
 
-
-
-            recommendedListViewModel.getRecommendedList(model.liveData.value!!)
+            recommendedListViewModel.getRecommendedList(userInfoViewModel.liveData.value!!)
         }
 
     }
@@ -179,7 +160,7 @@ class RecommendFragment : Fragment(),View.OnClickListener {
                         Log.d("recommend_test",cities[i].cityName)
                     }
                 }
-                model.liveData.value?.cities=inputCities
+                userInfoViewModel.liveData.value?.cities=inputCities
             })
             .setNegativeButton("취소",null)
             .create()
@@ -198,17 +179,15 @@ class RecommendFragment : Fragment(),View.OnClickListener {
             }).setTitle("우대 조건")
             .setPositiveButton("확인",DialogInterface.OnClickListener { dialog, which ->
                 val inputConditions =arrayOfNulls<String>(conditions.size)
-                model.liveData.value?.conditions=inputConditions
+                userInfoViewModel.liveData.value?.conditions=inputConditions
                 for(i in 0 until conditionsBooleanArr.size){
                     if(conditionsBooleanArr[i]){
-                        model.addConditions(i) //우대 조건 추가
+                        userInfoViewModel.addConditions(i) //우대 조건 추가
                         Log.d("recommend_test",conditions[i].toString())
                     }
                 }
             }).setNegativeButton("취소",null)
             .create()
-
-
     }
 
 
@@ -233,7 +212,6 @@ class RecommendFragment : Fragment(),View.OnClickListener {
 
         if(check==false) return null
         else return joinPath
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -251,12 +229,5 @@ class RecommendFragment : Fragment(),View.OnClickListener {
         Log.d("lifeCycle_test","onDestroyView 호출됨 , fragment-${productType}")
 
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("lifeCycle_test","onDestroy 호출됨 , fragment-${productType}")
-    }
-
-
 
 }

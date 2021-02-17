@@ -29,5 +29,4 @@ class MyPagerAdapter(
         return fragment
     }
 
-
 }
