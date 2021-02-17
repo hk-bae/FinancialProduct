@@ -1,15 +1,12 @@
 package com.hkbae.financialProduct.repository
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+
 import com.hkbae.financialProduct.service.UserApiManager
 import com.hkbae.financialProduct.model.User
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class UserRepository{
 

@@ -3,7 +3,6 @@ package com.hkbae.financialProduct.service
 
 import com.hkbae.financialProduct.model.User
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.*
 
 interface UserAPI {

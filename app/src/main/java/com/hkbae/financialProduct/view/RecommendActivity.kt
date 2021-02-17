@@ -2,7 +2,6 @@ package com.hkbae.financialProduct.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioGroup
 import androidx.lifecycle.Observer
@@ -10,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hkbae.financialProduct.R
 import com.hkbae.financialProduct.adapter.RecyclerViewAdapter
-import com.hkbae.financialProduct.databinding.ActivityLoginBinding
 import com.hkbae.financialProduct.databinding.ActivityRecommendBinding
-import com.hkbae.financialProduct.databinding.ActivityRegisterBinding
 import com.hkbae.financialProduct.model.FinancialProduct
 import com.hkbae.financialProduct.viewModel.RecommendedListViewModel
 import kotlinx.android.synthetic.main.activity_recommend.*

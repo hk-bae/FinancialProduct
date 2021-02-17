@@ -4,7 +4,6 @@ import com.hkbae.financialProduct.model.Deposit
 import com.hkbae.financialProduct.model.SavingsData
 import com.hkbae.financialProduct.model.UserInfo
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 
