@@ -33,17 +33,17 @@ class RegisterActivity : AppCompatActivity() {
         val view= binding.root
         setContentView(view)
 
-        initRegister()
+        initRegisterActivity()
 
 
         
     }
 
-    private fun initRegister(){
+    private fun initRegisterActivity(){
         val registerInfo:String = "회원가입을 위한 필수정보를 입력해주세요."
         val ssb:SpannableStringBuilder= SpannableStringBuilder(registerInfo)
         ssb.setSpan(ForegroundColorSpan(Color.parseColor("#03A9F4")),9,13,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        binding.registerInfoText.setText(ssb)
+        binding.registerInfoText.text=ssb
 
         initDateListener()
 

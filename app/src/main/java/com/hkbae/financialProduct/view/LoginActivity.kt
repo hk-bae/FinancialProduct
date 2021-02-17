@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         //sharedPreference에 저장된 로그인 기록이 있으면 자동 로그인
         val sharedPreference = getSharedPreferences("user", Context.MODE_PRIVATE)
         val id = sharedPreference.getString("id", null)
-        var password = sharedPreference.getString("password", null)
+        val password = sharedPreference.getString("password", null)
         if (id != null && password != null) {
             model.login(id, password)
         }
@@ -50,24 +50,24 @@ class LoginActivity : AppCompatActivity() {
         val observer = Observer<User>{ user->
             if(user.id.isNotEmpty()){
                 //로그인 성공 시 main 화면으로 이동
-
                     Log.d("login",user.id)
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
 
-                //유저 아이디,비밀번호를 sharedPreference에 저장
-                val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
-                val editor=sharedPreferences.edit()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
 
-                editor.apply{
-                    putString("id",user.id)
-                    putString("password",user.password)
-                    putString("name",user.name)
-                    putString("born",user.born)
-                    commit()
-                }
+                    //유저 아이디,비밀번호를 sharedPreference에 저장
+                    val sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE)
+                    val editor=sharedPreferences.edit()
 
-                finish()
+                    editor.apply{
+                        putString("id",user.id)
+                        putString("password",user.password)
+                        putString("name",user.name)
+                        putString("born",user.born)
+                        commit()
+                    }
+
+                    finish()
 
             }else{
                 Toast.makeText(this@LoginActivity,"입력 정보를 확인해 주세요.", Toast.LENGTH_SHORT).show()

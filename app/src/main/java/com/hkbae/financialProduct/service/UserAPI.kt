@@ -2,6 +2,7 @@ package com.hkbae.financialProduct.service
 
 
 import com.hkbae.financialProduct.model.User
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -11,20 +12,20 @@ interface UserAPI {
     fun login(
         @Query("id") id:String,
         @Query("password") password:String
-    ) : Call<User>
+    ) : Single<User>
 
     @GET("/user/exist/")
     fun getUserCount( //id에 따른 사용자 정보 요청
         @Query("id") id : String
-    ) : Call<Int>
+    ) : Single<Int>
 
     @POST("/user/")
     fun postUser( //사용자 정보 insert 요청
         @Body user : User
-    ):Call<Int>
+    ): Single<Int>
 
     companion object {
-        const val SERVER_URL: String = "http://172.24.181.115:8080"
+        const val SERVER_URL: String = "http://172.24.191.107:8080"
     }
 
 
