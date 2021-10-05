@@ -21,7 +21,7 @@ interface UserInfoAPI {
     ) : Single<List<Deposit>>
 
     companion object {
-        const val SERVER_URL: String = "http://172.24.191.107:8080"
+        const val SERVER_URL: String = "http://10.0.2.2:8080"
     }
 
 

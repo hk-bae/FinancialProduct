@@ -20,8 +20,11 @@ class UserViewModel(application : Application) : AndroidViewModel(application){
     fun login(id:String, password:String){
         userRepository.login(id,password)
             .subscribe { user,throwable->
+
                 liveData.value=user
-                Log.d("Rx",throwable?.message ?: "정상 처리")
+                Log.d("Login","Login User ? ")
+                Log.d("Login",user.id)
+                Log.d("Rx",throwable?.message ?: "로그인 정상 처리")
             }
     }
 
